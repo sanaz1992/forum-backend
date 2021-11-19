@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'score',
+        'flag'
     ];
 
     /**
@@ -41,4 +43,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the threads for the user.
+     */
+    public function threads()
+    {
+        return $this->hasMany(Thread::class);
+    }
+
+    /**
+     * Get the answers for the user.
+     */
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    /**
+     * Get the subscribes for the user.
+     */
+    public function subscribes()
+    {
+        return $this->hasMany(Subscribe::class);
+    }
 }

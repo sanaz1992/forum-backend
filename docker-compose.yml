@@ -20,6 +20,8 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql
+    volumes:
+      - ./mysql:/var/liv/mysql
     restart: unless-stopped
     tty: true
     ports:
@@ -58,7 +60,7 @@ services:
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
-    entrypoint: ['npm']
+    entrypoint: [ 'npm' ]
   artisan:
     build:
       context: .
@@ -69,6 +71,6 @@ services:
     depends_on:
       - mysql
     working_dir: /var/www/html
-    entrypoint: ['php','/var/www/html/artisan']
+    entrypoint: [ 'php','/var/www/html/artisan' ]
     networks:
       - backend
