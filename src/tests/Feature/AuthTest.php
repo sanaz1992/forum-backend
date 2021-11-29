@@ -1,17 +1,33 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class AuthControllerTest extends TestCase
+class AuthTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function registerRoleAndPermission()
+    {
+        if (Role::where('name', config('permission.default_roles'))->count() < 1) {
+            foreach (config('permission.default_roles') as $role) {
+                Role::create(['name' => $role]);
+            }
+        }
+        if (Permission::where('name', config('permission.default_permissions'))->count() < 1) {
+            foreach (config('permission.default_permissions') as $permission) {
+                Permission::create(['name' => $permission]);
+            }
+        }
+
+    }
 
     /**
      * Register Tests
@@ -25,6 +41,7 @@ class AuthControllerTest extends TestCase
 
     public function test_new_user_can_register()
     {
+        $this->registerRoleAndPermission();
         $response = $this->postJson(route('auth.register'), [
             'name' => 'sanaz keyvanloo',
             'email' => 'sanaz.keyvanloo1992@gmail.com',

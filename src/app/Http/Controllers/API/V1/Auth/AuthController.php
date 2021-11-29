@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API\V01\Auth;
+namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,7 +28,10 @@ class AuthController extends Controller
         ]);
 
         //Insert User Into Database
-        resolve(UserRepository::class)->create($request);
+        $user = resolve(UserRepository::class)->create($request);
+
+        $defaultSuperAdminEmail = config('permission.default_super_admin_email');
+        $user->email === $defaultSuperAdminEmail ? $user->assignRole('Super Admin') : $user->assignRole('User');
 
         return response()->json([
             'message' => 'user created successfully.'
@@ -57,7 +59,7 @@ class AuthController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email'=>'incorrect email'
+            'email' => 'incorrect email'
         ]);
     }
 
@@ -67,8 +69,8 @@ class AuthController extends Controller
         Auth::logout();
 
         return \response()->json([
-            'message'=>'logged out.'
-        ],Response::HTTP_OK);
+            'message' => 'logged out.'
+        ], Response::HTTP_OK);
     }
 
 

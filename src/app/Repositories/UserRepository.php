@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository
 {
 
-    public function create($request): void
+    public function create($request)
     {
-        User::create([
+        return User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
