@@ -9,20 +9,7 @@ class Thread extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'title',
-        'slug',
-        'content',
-        'answer_id',
-        'user_id',
-        'channel_id',
-        'flag'
-    ];
+    protected $guarded = [];
 
     /**
      * Get the answer that owns the thread.

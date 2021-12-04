@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Thread;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +27,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+//        Gate::before(function ($user, $ability) {
+//            return $user->hasRole('Super Admin') ? true : false;
+//        });
+
+        Gate::define('user-thread', function (User $user, Thread $thread) {
+            return $user->id == $thread->user_id;
+        });
     }
 }

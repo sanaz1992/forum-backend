@@ -28,6 +28,9 @@ Route::prefix('/v1')->group(function () {
         })->name('auth.user');
 
     include __DIR__ . '\v1\auth_routes.php';
+
     include __DIR__ . '\v1\channel_routes.php';
+
+    include __DIR__ . '\v1\thread_routes.php';
 
 });
