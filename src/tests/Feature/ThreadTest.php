@@ -17,8 +17,6 @@ class ThreadTest extends TestCase
 
     public function test_all_threads_should_be_accessible()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->get(route('threads.index'));
 
         $response->assertStatus(Response::HTTP_OK);
