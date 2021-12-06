@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 
 use App\Models\Answer;
-use App\Models\Channel;
 use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
