@@ -4,17 +4,13 @@ namespace App\Http\Controllers\API\V1\Thread;
 
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
-use App\Models\Thread;
 use App\Repositories\AnswerRepository;
-use App\Repositories\ThreadRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnswerController extends Controller
 {
-    use RefreshDatabase;
 
     public function index()
     {

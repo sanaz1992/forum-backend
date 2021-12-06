@@ -4,13 +4,11 @@ namespace App\Http\Controllers\API\V1\Channel;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ChannelRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChannelController extends Controller
 {
-    use RefreshDatabase;
 
     /**
      * Get All Channels List
