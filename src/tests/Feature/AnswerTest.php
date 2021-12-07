@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 
 use App\Models\Answer;
+use App\Models\Channel;
 use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,6 +49,43 @@ class AnswerTest extends TestCase
             'message' => 'answer created successfully.'
         ]);
         $this->assertTrue($thread->answers()->whereContent('Bar')->exists());
+    }
+
+    /** @test */
+    public function user_score_will_increase_by_submit_new_answer()
+    {
+        $user=User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $thread = Thread::factory()->create();
+        $this->postJson(route('answers.store'), [
+            'content' => 'Foo',
+            'thread_id' => $thread->id
+        ])->assertSuccessful();
+
+        $user->refresh();
+        $this->assertEquals(10,$user->score);
+    }
+
+    /** @test */
+    public function user_score_will_do_not_increase_with_own_by_submit_new_answer()
+    {
+        $user=User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $thread = Thread::factory()->create([
+            'title' => 'Foo',
+            'content' => 'Bar',
+            'channel_id' => (Channel::factory()->create())->id,
+            'user_id'=>$user->id
+        ]);
+        $this->postJson(route('answers.store'), [
+            'content' => 'Foo',
+            'thread_id' => $thread->id
+        ])->assertSuccessful();
+
+        $user->refresh();
+        $this->assertEquals(0,$user->score);
     }
 
     /** @test */

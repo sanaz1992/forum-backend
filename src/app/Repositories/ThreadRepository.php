@@ -21,6 +21,11 @@ class ThreadRepository
         return Thread::whereSlug($slug)->whereFlag(1)->first();
     }
 
+    public function find($id)
+    {
+        return Thread::find($id);
+    }
+
     public function store(Request $request)
     {
         Thread::create([

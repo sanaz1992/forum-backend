@@ -4,9 +4,17 @@ namespace App\Http\Controllers\API\V1\Thread;
 
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
+use App\Models\Subscribe;
+use App\Models\Thread;
+use App\Models\User;
+use App\Notifications\NewReplySubmitted;
 use App\Repositories\AnswerRepository;
+use App\Repositories\SubscribeRepository;
+use App\Repositories\ThreadRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnswerController extends Controller
@@ -26,7 +34,18 @@ class AnswerController extends Controller
             'thread_id' => 'required'
         ]);
 
+        //Store Answer In Database
         resolve(AnswerRepository::class)->store($request);
+
+        //Add Score For User
+        if (auth()->user()->id !== Thread::find($request->thread_id)->user_id) {
+            auth()->user()->increment('score', 10);
+        }
+
+        //send Notification For User Subscribe This Thread
+        $notifiable_users_id = resolve(SubscribeRepository::class)->getNotifiableUsers($request->thread_id);
+        $notifiable_users = resolve(UserRepository::class)->find($notifiable_users_id);
+        Notification::send($notifiable_users, new NewReplySubmitted(resolve(ThreadRepository::class)->find($request->thread_id)));
 
         return \response()->json([
             'message' => 'answer created successfully.'
