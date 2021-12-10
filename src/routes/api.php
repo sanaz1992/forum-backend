@@ -23,9 +23,7 @@ use  \App\Http\Controllers\API\V1\Auth\AuthController;
 Route::prefix('/v1')->group(function () {
 
     Route::middleware('auth:sanctum')
-        ->get('/user', function (Request $request) {
-            return $request->user();
-        })->name('auth.user');
+        ->get('/user', [\App\Http\Controllers\API\V1\User\UserController::class, 'user'])->name('auth.user');
 
     include __DIR__ . '\v1\auth_routes.php';
 

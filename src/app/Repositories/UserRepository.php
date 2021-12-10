@@ -21,4 +21,9 @@ class UserRepository
     {
         return User::find($id);
     }
+
+    public function leaderboards()
+    {
+        return User::orderByDesc('score')->paginate(20);
+    }
 }
