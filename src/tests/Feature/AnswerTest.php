@@ -27,6 +27,7 @@ class AnswerTest extends TestCase
     /** @test */
     public function create_answer_should_be_validated()
     {
+        Sanctum::actingAs(User::factory()->create());
         $response = $this->postJson(route('answers.store'), []);
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -54,7 +55,7 @@ class AnswerTest extends TestCase
     /** @test */
     public function user_score_will_increase_by_submit_new_answer()
     {
-        $user=User::factory()->create();
+        $user = User::factory()->create();
         Sanctum::actingAs($user);
 
         $thread = Thread::factory()->create();
@@ -64,20 +65,20 @@ class AnswerTest extends TestCase
         ])->assertSuccessful();
 
         $user->refresh();
-        $this->assertEquals(10,$user->score);
+        $this->assertEquals(10, $user->score);
     }
 
     /** @test */
     public function user_score_will_do_not_increase_with_own_by_submit_new_answer()
     {
-        $user=User::factory()->create();
+        $user = User::factory()->create();
         Sanctum::actingAs($user);
 
         $thread = Thread::factory()->create([
             'title' => 'Foo',
             'content' => 'Bar',
             'channel_id' => (Channel::factory()->create())->id,
-            'user_id'=>$user->id
+            'user_id' => $user->id
         ]);
         $this->postJson(route('answers.store'), [
             'content' => 'Foo',
@@ -85,12 +86,14 @@ class AnswerTest extends TestCase
         ])->assertSuccessful();
 
         $user->refresh();
-        $this->assertEquals(0,$user->score);
+        $this->assertEquals(0, $user->score);
     }
 
     /** @test */
     public function update_answer_should_be_validated()
     {
+        Sanctum::actingAs(User::factory()->create());
+
         $answer = Answer::factory()->create();
         $response = $this->putJson(route('answers.update', [$answer]), []);
 

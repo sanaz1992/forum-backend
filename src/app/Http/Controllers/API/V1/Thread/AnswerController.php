@@ -19,6 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AnswerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('user_block')->except(['index', 'show']);
+    }
 
     public function index()
     {
