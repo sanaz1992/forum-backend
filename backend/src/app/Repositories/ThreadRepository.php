@@ -13,7 +13,7 @@ class ThreadRepository
 {
     public function getAllAvailableThreads()
     {
-        return Thread::whereFlag(true)->latest()->get();
+        return Thread::whereFlag(true)->latest()->z();
     }
 
     public function getThreadBySlug($slug)

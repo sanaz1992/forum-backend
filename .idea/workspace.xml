@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ac0dde71-c505-400b-8828-6fc2d3e214f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/axios.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/views/auth/Register.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/views/thread/CreateThread.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/views/thread/SingleThread.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package.json" />
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="227zP80g0SCWWir2OZAXuXxxEvk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="app.teamhub.trackedBranches" value="-1h99gil/master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/views/auth" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dockerProject\froumRoyalCodes\frontend\src\views\auth" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac0dde71-c505-400b-8828-6fc2d3e214f2" name="Default Changelist" comment="" />
+      <created>1639203400312</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639203400312</updated>
+      <workItem from="1639203409993" duration="1523000" />
+      <workItem from="1639205226598" duration="960000" />
+      <workItem from="1639207093827" duration="1091000" />
+      <workItem from="1639224399011" duration="1612000" />
+      <workItem from="1639226223029" duration="1087000" />
+      <workItem from="1639385159837" duration="1191000" />
+      <workItem from="1639387421766" duration="582000" />
+      <workItem from="1639388056642" duration="1766000" />
+      <workItem from="1639389944747" duration="1282000" />
+      <workItem from="1639398391673" duration="1321000" />
+      <workItem from="1639405396354" duration="1141000" />
+      <workItem from="1639407222673" duration="1019000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
