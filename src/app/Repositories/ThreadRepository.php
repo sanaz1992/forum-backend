@@ -14,7 +14,7 @@ class ThreadRepository
     public function getAllAvailableThreads()
     {
         return Thread::whereFlag(true)->with([
-            'channel:id,name.slug',
+            'channel:id,name,slug',
             'user:id,name'
         ])->latest()->paginate(10);
     }

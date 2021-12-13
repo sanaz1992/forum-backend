@@ -12,11 +12,11 @@ class Thread extends Model
     protected $guarded = [];
 
     /**
-     * Get the answer that owns the thread.
+     * Get the user that owns the thread.
      */
-    public function answer()
+    public function user()
     {
-        return $this->belongsTo(Answer::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
