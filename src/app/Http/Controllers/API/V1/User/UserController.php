@@ -15,7 +15,8 @@ class UserController extends Controller
     {
         $data = [
             Auth::user(),
-            'notifications' => Auth::user()->unreadNotifications()
+            'notifications' => Auth::user()->unreadNotifications(),
+            'message'=>'successful'
         ];
         return response()->json($data, Response::HTTP_OK);
     }

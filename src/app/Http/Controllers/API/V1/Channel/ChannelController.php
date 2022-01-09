@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Channel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreChannelRequest;
 use App\Repositories\ChannelRepository;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,10 @@ class ChannelController extends Controller
      * @method GET
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllChannelsList()
+    public function getAllChannelsList(ChannelRepository $channelRepository)
     {
-        $channels = resolve(ChannelRepository::class)->getAll();
+        $channels = $channelRepository->getAll();
+//        $channels = resolve(ChannelRepository::class)->getAll();
 
         return response()->json($channels, Response::HTTP_OK);
     }
@@ -28,15 +30,16 @@ class ChannelController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(Request $request)
+    public function create(StoreChannelRequest $request,ChannelRepository $channelRepository)
     {
-        //Validate Form Inputs
-        $request->validate([
-            'name' => ['required']
-        ]);
+//        //Validate Form Inputs
+//        $request->validate([
+//            'name' => ['required']
+//        ]);
 
         //Store New Channel In DataBase
-        resolve(ChannelRepository::class)->create($request);
+        $channelRepository->create($request);
+//        resolve(ChannelRepository::class)->create($request);
 
         return \response()->json([
             'message' => 'channel created successfully.'
@@ -49,31 +52,33 @@ class ChannelController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request)
+    public function update(StoreChannelRequest $request,ChannelRepository $channelRepository)
     {
-        //Validate Form Inputs
-        $request->validate([
-            'id' => ['required'],
-            'name' => ['required'],
-        ]);
+//        //Validate Form Inputs
+//        $request->validate([
+//            'id' => ['required'],
+//            'name' => ['required'],
+//        ]);
 
         //Update Channel
-        resolve(ChannelRepository::class)->update($request);
+       $channelRepository->update($request);
+//        resolve(ChannelRepository::class)->update($request);
 
         return \response()->json([
             'message' => 'channel edited successfully.'
         ], Response::HTTP_OK);
     }
 
-    public function delete(Request $request)
+    public function delete(StoreChannelRequest $request ,ChannelRepository $channelRepository)
     {
-        //Validate Form Inputs
-        $request->validate([
-            'id' => ['required', 'numeric'],
-        ]);
+//        //Validate Form Inputs
+//        $request->validate([
+//            'id' => ['required', 'numeric'],
+//        ]);
 
         //Delete Channel From DataBase
-        resolve(ChannelRepository::class)->delete($request->id);
+        $channelRepository->delete($request->id);
+//        resolve(ChannelRepository::class)->delete($request->id);
 
         return \response()->json([
             'message' => 'channel deleted successfuly.'

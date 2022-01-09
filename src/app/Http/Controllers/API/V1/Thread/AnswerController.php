@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Thread;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAnswerRequest;
 use App\Models\Answer;
 use App\Models\Subscribe;
 use App\Models\Thread;
@@ -24,25 +25,27 @@ class AnswerController extends Controller
         $this->middleware('user_block')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(AnswerRepository $answerRepository)
     {
-        $answers = resolve(AnswerRepository::class)->getAll();
+        $answers = $answerRepository->getAll();
+//        $answers = resolve(AnswerRepository::class)->getAll();
 
         return \response()->json($answers, Response::HTTP_OK);
     }
 
-    public function store(Request $request)
+    public function store(StoreAnswerRequest $request, AnswerRepository $answerRepository)
     {
-        $request->validate([
-            'content' => 'required',
-            'thread_id' => 'required'
-        ]);
+//        $request->validate([
+//            'content' => 'required',
+//            'thread_id' => 'required'
+//        ]);
 
         //Store Answer In Database
-        resolve(AnswerRepository::class)->store($request);
+        $answerRepository->store($request);
+//        resolve(AnswerRepository::class)->store($request);
 
         //Add Score For User
-        if (auth()->user()->id !== Thread::find($request->thread_id)->user_id) {
+        if (auth()->user()->id !== resolve(ThreadRepository::class)->find($request->thread_id)->user_id) {
             auth()->user()->increment('score', 10);
         }
 
@@ -56,13 +59,15 @@ class AnswerController extends Controller
         ], Response::HTTP_CREATED);
     }
 
-    public function update(Request $request, Answer $answer)
+    public function update(StoreAnswerRequest $request, Answer $answer,AnswerRepository $answerRepository)
     {
-        $request->validate([
-            'content' => 'required'
-        ]);
+//        $request->validate([
+//            'content' => 'required'
+//        ]);
+
         if (Gate::forUser(auth()->user())->allows('user-answer', $answer)) {
-            resolve(AnswerRepository::class)->update($request, $answer);
+            $answerRepository->update($request, $answer);
+//            resolve(AnswerRepository::class)->update($request, $answer);
             return \response()->json([
                 'message' => 'answer updated successfully.'
             ], Response::HTTP_OK);
@@ -73,10 +78,11 @@ class AnswerController extends Controller
         ], Response::HTTP_FORBIDDEN);
     }
 
-    public function destroy(Answer $answer)
+    public function destroy(Answer $answer,AnswerRepository $answerRepository)
     {
         if (Gate::forUser(auth()->user())->allows('user-answer', $answer)) {
-            resolve(AnswerRepository::class)->destroy($answer);
+            $answerRepository->destroy($answer);
+//            resolve(AnswerRepository::class)->destroy($answer);
             return \response()->json([
                 'message' => 'answer delete successfully.'
             ], Response::HTTP_OK);
